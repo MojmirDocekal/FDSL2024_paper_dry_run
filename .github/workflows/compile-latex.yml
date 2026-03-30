@@ -74,17 +74,18 @@ jobs:
             texlive-latex-extra \
             texlive-fonts-recommended \
             texlive-humanities \
-            texlive-bibtex-extra
+            texlive-bibtex-extra \
+            texlive-xetex
       
       # Compile the LaTeX document
-      # We run pdflatex twice to ensure:
+      # We run xelatex twice to ensure:
       # 1. First run: Generates auxiliary files (.aux, .toc, etc.)
       # 2. Second run: Uses auxiliary files to resolve cross-references, table of contents, etc.
       # Note: -interaction=nonstopmode prevents the build from hanging on errors
       - name: Compile LaTeX document
         run: |
-          pdflatex -interaction=nonstopmode document.tex
-          pdflatex -interaction=nonstopmode document.tex
+          xelatex -interaction=nonstopmode main.tex
+          xelatex -interaction=nonstopmode main.tex
       
       # Upload the compiled PDF as an artifact
       # The artifact will be available for download from the workflow run page
@@ -93,6 +94,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: compiled-pdf
-          path: document.pdf
+          path: main.pdf
           # Keep the artifact for 90 days (GitHub's default)
           retention-days: 90
