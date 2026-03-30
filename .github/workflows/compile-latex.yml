@@ -77,7 +77,8 @@ jobs:
             texlive-humanities \
             texlive-bibtex-extra \
             texlive-xetex \
-            texlive-publishers
+            texlive-publishers \
+            fonts-arimo
       
       # Compile the LaTeX document
       # We run xelatex twice to ensure:
