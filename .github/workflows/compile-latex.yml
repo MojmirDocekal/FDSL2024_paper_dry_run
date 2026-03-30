@@ -79,6 +79,7 @@ jobs:
             texlive-bibtex-extra \
             texlive-xetex \
             texlive-pstricks \
+            texlive-full \
             texlive-publishers
       
       # Compile the LaTeX document
