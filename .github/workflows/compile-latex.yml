@@ -90,6 +90,7 @@ jobs:
       - name: Compile LaTeX document
         run: |
           xelatex -interaction=nonstopmode main.tex
+          biber main
           xelatex -interaction=nonstopmode main.tex
       
       # Upload the compiled PDF as an artifact
