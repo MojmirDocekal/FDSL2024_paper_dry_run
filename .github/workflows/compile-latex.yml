@@ -76,7 +76,8 @@ jobs:
             texlive-fonts-recommended \
             texlive-humanities \
             texlive-bibtex-extra \
-            texlive-xetex
+            texlive-xetex \
+            texlive-publishers
       
       # Compile the LaTeX document
       # We run xelatex twice to ensure:
