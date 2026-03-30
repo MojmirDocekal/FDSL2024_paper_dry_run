@@ -1,0 +1,71 @@
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author 
+\makeatother
+
+\newcommand{\togglepaper}[1][0]{ 
+%   \bibliography{../localbibliography}
+  \papernote{\scriptsize\normalfont
+    \ResolveAffiliations
+      [output affiliation=false, output authors font=\normalfont]
+      {\theauthor}.
+    \titleTemp. 
+    To appear in: 
+    Change Volume Editor \& in localcommands.tex 
+    Change volume title in localcommands.tex
+    Berlin: Language Science Press. [preliminary page numbering]
+  } 
+  \pagenumbering{roman}
+  \setcounter{chapter}{#1}
+  \addtocounter{chapter}{-1}
+}
+
+% add commmands of your own if needed
+\newcommand{\mC}[1]{\multicolumn{1}{c}{#1}} % multicolumn with a single column
+\newcommand{\eref}[1]{(\ref{ex:#1})}
+\newcommand{\sref}[1]{Section~\ref{sec:#1}}
+\newcommand{\tref}[1]{Table~\ref{tab:#1}}
+\newcommand{\fref}[1]{Figure~\ref{fig:#1}}
+
+% \newcommand\pla{\textit{\nobreakdash-á}}
+% \newcommand\pli{\textit{\nobreakdash-i}}
+% \newcommand\plsi{\textit{\nobreakdash-í}}
+% \newcommand\ok{\textit{\nobreakdash-ók}}
+% \newcommand\ik{\textit{\nobreakdash-ʲik}}
+% \newcommand\chik{\textit{\nobreakdash-tʃʲik}}
+
+\newcommand\pla{[á]}
+\newcommand\pli{[i]}
+\newcommand\plsi{[í]}
+\newcommand\ok{[ók]}
+\newcommand\ik{[ʲik]}
+\newcommand\chik{[tʃʲik]}
+
+\newcommand{\DIM}{\textsc{dim}{}\xspace}	%diminutive
+
+\newcommand\gap{\_\_\_}
+
+\newcommand{\feat}[2][\textit]{[#1{#2}]}
+\newcommand{\urfeat}[3][\textit]{/#2\textsubscript{\feat[#1]{#3}}/}
+
+\setlength{\unitlength}{1em}
+\newcommand\like[1]{\begin{picture}(1,1)
+ \ifnum0=#1\put(.5,.35){\circle{1}}\else
+ \ifnum10=#1\put(.5,.35){\circle*{1}}\else
+ \put(.5,.35){\circle{1}}\put(.5,.35){\circle*{.#1}}
+\fi\fi\end{picture}
+}
+
+\hyphenation{par-a-digms}
+
+% for formatting percent sign in tables
+\ExplSyntaxOn
+\NewDocumentCommand \tabpct {}
+  {
+    \siunitx_unit_format:nN {\percent} \l_tmpa_tl
+    \siunitx_quantity_print:nV { } \l_tmpa_tl
+  }
+\ExplSyntaxOff
+
+% keep this here (at the end of this document)
+\AtBeginDocument{\nogltOffset} %removes extra spacing before trans line in examples
