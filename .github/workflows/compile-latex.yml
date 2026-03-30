@@ -80,7 +80,7 @@ jobs:
             texlive-publishers \
             wget
           mkdir -p ~/.local/share/fonts
-          BASE="https://github.com/google/fonts/raw/main/apache/arimo/static"
+          BASE="https://raw.githubusercontent.com/google/fonts/main/apache/arimo/static"
           wget -q "$BASE/Arimo-Regular.ttf" -O ~/.local/share/fonts/Arimo-Regular.ttf
           wget -q "$BASE/Arimo-Bold.ttf" -O ~/.local/share/fonts/Arimo-Bold.ttf
           wget -q "$BASE/Arimo-Italic.ttf" -O ~/.local/share/fonts/Arimo-Italic.ttf
