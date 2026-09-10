@@ -1,163 +1,84 @@
-# TeXGHAutomation
+# Working on your article in this repository
 
-Automated LaTeX compilation and review workflow for collaborative document editing.
+This repository is used for writing and revising your TeX article (`main.tex`) together with editor feedback through GitHub Issues.
 
-## Overview
+## 1) Edit `main.tex`
 
-This repository uses GitHub Actions to automatically compile LaTeX documents into PDFs whenever changes are made. It also provides a structured review workflow to help collaborators provide feedback on the document.
+### Option A (recommended for quick edits): directly on GitHub
+1. Open the repository in your browser.
+2. In the file list, **click `main.tex`**.
+3. Click the **pencil icon (Edit this file)** in the top-right.
+4. Make your small changes and save by committing (see section 3).
 
-## Automated LaTeX Compilation Workflow
+### Option B (recommended for bigger edits): online VS Code (`github.dev`)
+1. Open the repository page.
+2. Press **`.` (dot)** on your keyboard, or change `github.com` in the URL to `github.dev`.
+3. In the left Explorer panel, **click `main.tex`** and edit.
 
-Every time you push changes to `.tex` files on the `main` branch or create a pull request, GitHub Actions automatically:
-1. Installs the necessary TeXLive packages
-2. Compiles `document.tex` using `pdflatex` (runs twice to resolve references)
-3. Makes the compiled PDF available as a downloadable artifact
+### Option C (for experienced users)
+If you normally work locally with `git pull` / `git push`, you can use your standard workflow.
 
-### Viewing Workflow Status
+---
 
-- Go to the **Actions** tab in this repository
-- Click on the most recent workflow run
-- Check if the compilation succeeded (green checkmark) or failed (red X)
+## 2) In `github.dev`, install a LaTeX extension (helpful)
 
-## For Authors
+In online VS Code:
+1. Open the **Extensions** panel (left sidebar, square icon).
+2. Search for **LaTeX Workshop**.
+3. Click **Install**.
 
-### Making Changes to LaTeX Files
+Why this helps:
+- better TeX syntax highlighting,
+- command/intellisense support,
+- easier navigation in larger `.tex` files.
 
-1. **Edit the `.tex` files** in your local clone or directly on GitHub
-2. **Commit and push** your changes to the `main` branch or create a pull request
-3. **Wait for the workflow** to run (usually takes 1-2 minutes)
-4. **Download the compiled PDF** from the workflow artifacts (see below)
+(Preview/build features may be limited in browser VS Code, but editing support is still very useful.)
 
-### Downloading Compiled PDFs
+---
 
-To download the compiled PDF after a workflow run:
+## 3) Commit and push your changes (important)
 
-1. Go to the **Actions** tab
-2. Click on the workflow run you want to download from
-3. Scroll down to the **Artifacts** section at the bottom of the page
-4. Click on **compiled-pdf** to download the PDF
+After editing, your changes must be committed so editors can see them and PDF recompilation can start.
 
-### Referencing Issues in Commits
+### On GitHub web editor
+1. Click **Commit changes…** (top-right).
+2. Write a short commit message (e.g., `Fix typo in section 2`).
+3. Choose **Commit directly to the main branch** (unless instructed otherwise).
+4. Click **Commit changes**.
 
-When addressing reviewer feedback, link your commits to the relevant issues:
+### In `github.dev`
+1. Open the **Source Control** panel (branch icon on the left).
+2. Review changed files.
+3. Enter a commit message in the message box.
+4. Click **Commit**.
+5. Click **Sync Changes** / **Push** (if prompted, confirm).
 
-- **To close an issue automatically**: Include `fixes #123` or `closes #123` in your commit message
-- **To reference without closing**: Use `addresses #123` or `relates to #123`
+---
 
-**Examples:**
-```
-git commit -m "Improved mathematical notation in Section 2 (fixes #45)"
-git commit -m "Added clarification to introduction (addresses #12)"
-```
+## 4) Use Issues for requested corrections
 
-### Adding LaTeX Packages
+- Open the **Issues** tab to see what needs to be fixed.
+- Each Issue describes a requested correction from editors.
+- You can discuss details in the Issue comments (ask questions, clarify wording, etc.).
+- Most importantly: **apply the correction in `main.tex`, then commit and push** as described above.
+- Repeat until all assigned/open issues are resolved.
 
-If you need to use additional LaTeX packages that aren't currently installed:
+---
 
-1. Edit `.github/workflows/compile-latex.yml`
-2. Find the "Install TeXLive" step
-3. Add the required package to the `apt-get install` command
-4. Commit and push the changes
+## 5) Find the compiled PDF in GitHub Actions
 
-**Common packages to add:**
-- `texlive-publishers` - For publisher-specific document classes (IEEE, ACM, Springer)
-- `texlive-science` - For scientific packages (algorithms, chemistry, physics)
-- `texlive-humanities` - For linguistics and critical editions
-- `texlive-fonts-extra` - For additional fonts
+Each push triggers automatic compilation of the PDF.
 
-**Example:**
-```yaml
-sudo apt-get install -y \
-  texlive-base \
-  texlive-latex-recommended \
-  texlive-latex-extra \
-  texlive-fonts-recommended \
-  texlive-bibtex-extra \
-  texlive-publishers
-```
+To download it:
+1. Open the **Actions** tab.
+2. Click the **most recent workflow run**.
+3. Scroll to **Artifacts**.
+4. Download **`compiled-pdf`** (ZIP file).
 
-### Finding Missing Packages from Error Logs
+Notes:
+- Compilation is not immediate; it usually takes about **6 minutes**.
+- If you don’t see the artifact yet, wait a bit and refresh the run page.
 
-If compilation fails:
+---
 
-1. Go to the **Actions** tab and click on the failed workflow run
-2. Click on the **compile-latex** job
-3. Expand the "Compile LaTeX document" step
-4. Look for errors like `! LaTeX Error: File 'packagename.sty' not found`
-5. Search online for "packagename.sty ubuntu texlive" to find which package to install
-6. Common mappings:
-   - `algorithm2e.sty` → `texlive-science`
-   - `IEEEtran.cls` → `texlive-publishers`
-   - `beamer.cls` → `texlive-latex-recommended` (already included)
-
-## For Reviewers
-
-### Creating Review Issues
-
-To submit feedback on the document:
-
-1. Go to the **Issues** tab
-2. Click **New Issue**
-3. Select the **Review Comment** template
-4. Fill in all the fields:
-   - **Section/Location**: Where in the document (e.g., "Section 2.1", "Page 3")
-   - **Description**: What needs attention
-   - **Suggested Improvement**: Your recommendation
-   - **Priority Level**: Critical/Important/Nice to have
-5. Submit the issue
-
-The issue will automatically be labeled with `review-comment` for easy filtering.
-
-### Checking Compiled PDFs
-
-Before reviewing, download the latest compiled PDF:
-
-1. Go to the **Actions** tab
-2. Click on the most recent **successful** workflow run (green checkmark)
-3. Download the **compiled-pdf** artifact from the bottom of the page
-4. Open the PDF and review it
-5. Create issues for any feedback using the review comment template
-
-### Filtering Review Comments
-
-To see all review comments:
-- Go to **Issues** tab
-- Click on **Labels** → **review-comment**
-- Or use the search: `is:issue label:review-comment`
-
-## Repository Structure
-
-```
-.
-├── .github/
-│   ├── workflows/
-│   │   └── compile-latex.yml      # Automated compilation workflow
-│   └── ISSUE_TEMPLATE/
-│       └── review-comment.md      # Review issue template
-├── document.tex                    # Main LaTeX document
-└── README.md                       # This file
-```
-
-## Troubleshooting
-
-### Workflow fails with "File not found" error
-- Check the error logs to identify the missing `.sty` or `.cls` file
-- Add the corresponding TeXLive package to the workflow (see "Adding LaTeX Packages" above)
-
-### PDF has incorrect references or table of contents
-- The workflow runs `pdflatex` twice, which should resolve most references
-- If you're using bibliographies with BibTeX, you'll need to modify the workflow to add `bibtex` compilation between the two `pdflatex` runs
-- For complex documents, you may need to add additional compilation passes
-
-### Workflow doesn't trigger
-- Make sure you're pushing changes to `.tex` files
-- Check that you're pushing to the `main` branch or creating a pull request
-- Verify the workflow file is in `.github/workflows/` and has the correct syntax
-
-## Contributing
-
-1. Fork the repository
-2. Make your changes in a new branch
-3. Submit a pull request
-4. Wait for the automated compilation to complete
-5. Download and review the compiled PDF from the PR's workflow run
+If anything is unclear, ask in the relevant Issue and tag the editors.
