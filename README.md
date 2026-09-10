@@ -1,5 +1,19 @@
 # Working on your article in this repository
 
+## Quick Start (for authors)
+
+1. Open **`main.tex`** in the repository file list (click it).
+2. Edit either:
+   - directly on GitHub (pencil icon), or
+   - in online VS Code (`github.dev`: press `.` on the repo page).
+3. In `github.dev`, install **LaTeX Workshop** extension (Extensions panel) for easier TeX editing.
+4. **Commit and push your changes** with a short message (e.g., `Fix example in section 3`).
+5. Check **Issues** tab for requested corrections from editors; discuss in comments if needed.
+6. After each push, wait ~6 minutes for compilation.
+7. Download PDF from **Actions → latest run → Artifacts → `compiled-pdf`** (ZIP).
+
+---
+
 This repository is used for writing and revising your TeX article (`main.tex`) together with editor feedback through GitHub Issues.
 
 ## 1) Edit `main.tex`
@@ -18,8 +32,6 @@ This repository is used for writing and revising your TeX article (`main.tex`) t
 ### Option C (for experienced users)
 If you normally work locally with `git pull` / `git push`, you can use your standard workflow.
 
----
-
 ## 2) In `github.dev`, install a LaTeX extension (helpful)
 
 In online VS Code:
@@ -33,8 +45,6 @@ Why this helps:
 - easier navigation in larger `.tex` files.
 
 (Preview/build features may be limited in browser VS Code, but editing support is still very useful.)
-
----
 
 ## 3) Commit and push your changes (important)
 
@@ -53,8 +63,6 @@ After editing, your changes must be committed so editors can see them and PDF re
 4. Click **Commit**.
 5. Click **Sync Changes** / **Push** (if prompted, confirm).
 
----
-
 ## 4) Use Issues for requested corrections
 
 - Open the **Issues** tab to see what needs to be fixed.
@@ -62,8 +70,6 @@ After editing, your changes must be committed so editors can see them and PDF re
 - You can discuss details in the Issue comments (ask questions, clarify wording, etc.).
 - Most importantly: **apply the correction in `main.tex`, then commit and push** as described above.
 - Repeat until all assigned/open issues are resolved.
-
----
 
 ## 5) Find the compiled PDF in GitHub Actions
 
